@@ -11,20 +11,26 @@ import ListContact from './component/screen/ListContact'
 import DrawerInfo from './component/screen/DrawerInfo'
 import Chat from './component/screen/Chat'
 
-const StackNavigation = createStackNavigator({
-    ListContactScr: ListContact,
-    ChatScr: Chat,
-    DrawerNav: DrawerInfo,
-})
+const DrawerNavigation = createDrawerNavigator(
+    {
+        ListContact,
+        DrawerNav: DrawerInfo,
+        ChatScr: Chat,
+    },
+    {
+        contentComponent: DrawerInfo,
+    })
 
-const DrawerNavigation = createDrawerNavigator({
-    DrawerNav: StackNavigation,
-})
+const StackNavigation = createStackNavigator(
+    {
+        LoginScr: Login,
+        ListContactScr: {
+            screen: DrawerNavigation,
+            navigationOptions: {
+                header: null,
+                headerLeft: null,
+            }},
+    })
 
-const SwitchNavigation = createSwitchNavigator({
-    LoginScr: Login,
-    DrawerNav: DrawerNavigation,
-})
-
-const Application = createAppContainer(SwitchNavigation)
+const Application = createAppContainer(StackNavigation)
 export default Application
