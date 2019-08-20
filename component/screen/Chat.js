@@ -1,7 +1,6 @@
 // Copyright (c) 2019-present vantuan88291, Personal. All Rights Reserved.
 import React, {Component} from 'react'
-import {View, Image, Text, TextInput, StyleSheet, ScrollView, FlatList, TouchableOpacity} from 'react-native'
-import {Header} from 'react-native-elements'
+import {View, Image, Text, TextInput, StyleSheet, ScrollView, FlatList, TouchableOpacity, ImageBackground} from 'react-native'
 
 class Chat extends Component {
     static navigationOptions = {header: null};
@@ -10,8 +9,6 @@ class Chat extends Component {
         super(props)
         this.state = {
             messages: [],
-            item: {},
-            textmsg: 'Text Msg',
         }
     }
 
@@ -22,13 +19,12 @@ class Chat extends Component {
     }
 
     componentDidMount() {
-        const item = this.props.navigation.getParam('item', 'NO-ID')
         this.setState({
             messages: [
                 {
                     id: 1,
                     text: 'Hello Bravo!',
-                    createdAt: new Date(),
+                    createdAt: '9:00 PM',
                     user: {
                         id: 1,
                         name: 'Alpha',
@@ -38,7 +34,7 @@ class Chat extends Component {
                 {
                     id: 2,
                     text: 'Hello Alpha!',
-                    createdAt: new Date(),
+                    createdAt: '9:03 PM',
                     user: {
                         id: 2,
                         name: 'Bravo',
@@ -48,7 +44,7 @@ class Chat extends Component {
                 {
                     id: 3,
                     text: 'Where is Charlie,boi?',
-                    createdAt: new Date(),
+                    createdAt: '9:05 PM',
                     user: {
                         id: 1,
                         name: 'Alpha',
@@ -58,29 +54,27 @@ class Chat extends Component {
 
             ],
         })
-        this.setState({item})
     }
 
     render() {
         return (
             <View style={mstyles.container}>
-                <Header
-                    containerStyle={{
-                        backgroundColor: '#ff90a2',
-                        justifyContent: 'space-around',
-                    }}
-                >
-                    <TouchableOpacity
-                        style={mstyles.icon}
-                        onPress={() => this.props.navigation.goBack()}
+                <View>
+                    <ImageBackground
+                        source={require('/home/vu/ReactNative/btl1/image/Title.png')}
+                        style={mstyles.imgbg}
                     >
-                        <Image
-                            source={require('/home/vu/ReactNative/btl1/image/GoBack.png')}
-                            style={mstyles.icon}
-                        />
-                    </TouchableOpacity>
-                    <Text style={mstyles.headertext}>{this.state.item.fullname}</Text>
-                </Header>
+                        <View style={mstyles.box}>
+                            <TouchableOpacity style={mstyles.iconbox}>
+                                <Image
+                                    source={require('/home/vu/ReactNative/btl1/image/GoBack.png')}
+                                    style={mstyles.icon}
+                                />
+                            </TouchableOpacity>
+                            <Text style={mstyles.titletext}>Alpha</Text>
+                        </View>
+                    </ImageBackground>
+                </View>
                 <ScrollView style={mstyles.scrollview}>
                     <FlatList
                         data={this.state.messages}
@@ -124,35 +118,38 @@ class Chat extends Component {
                         ItemSeparatorComponent={this.separator}
                     />
                 </ScrollView>
-                <View style={mstyles.box}>
-                    <TouchableOpacity style={mstyles.icon}>
-                        <Image
-                            style={mstyles.icon}
-                            source={require('/home/vu/ReactNative/btl1/image/Plus.png')}
-                        />
-                    </TouchableOpacity>
-                    <Text>  </Text>
-                    <TouchableOpacity style={mstyles.icon}>
-                        <Image
-                            style={mstyles.icon}
-                            source={require('/home/vu/ReactNative/btl1/image/Smile.png')}
-                        />
-                    </TouchableOpacity>
-                    <Text>    </Text>
-                    <TextInput
-                        style={mstyles.textinput}
-                        onChangeText={(textmsg) => this.setState({textmsg})}
-                        value={this.state.textmsg}
-                    />
-                    <Text>  </Text>
-                    <View style={mstyles.button}>
-                        <TouchableOpacity style={mstyles.shape}>
-                            <Image
-                                style={mstyles.touchsend}
-                                source={require('/home/vu/ReactNative/btl1/image/Bottom.png')}
+                <View>
+                    <ImageBackground
+                        source={require('/home/vu/ReactNative/btl1/image/Bottom.png')}
+                        style={mstyles.imgbottom}
+                    >
+                        <View style={mstyles.box}>
+                            <TouchableOpacity style={mstyles.iconbox}>
+                                <Image
+                                    style={mstyles.icon}
+                                    source={require('/home/vu/ReactNative/btl1/image/Plus.png')}
+                                />
+                            </TouchableOpacity>
+                            <TouchableOpacity style={mstyles.iconbox}>
+                                <Image
+                                    style={mstyles.icon}
+                                    source={require('/home/vu/ReactNative/btl1/image/Smile.png')}
+                                />
+                            </TouchableOpacity>
+                            <TextInput
+                                style={mstyles.textinput}
+                                placeholder='Text Massage'
                             />
-                        </TouchableOpacity>
-                    </View>
+                            <View style={mstyles.button}>
+                                <TouchableOpacity style={mstyles.iconbox}>
+                                    <Image
+                                        style={mstyles.icon}
+                                        source={require('/home/vu/ReactNative/btl1/image/Send.png')}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </ImageBackground>
                 </View>
             </View>
         )
@@ -166,9 +163,14 @@ const mstyles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: '#ffffff',
     },
-    headertext: {
-        fontSize: 20,
+    imgbg: {
+        height: 55,
+        width: '100%',
+    },
+    titletext: {
+        fontSize: 23,
         color: '#ffffff',
+        marginLeft: 10,
     },
     separator: {
         width: '100%',
@@ -177,19 +179,21 @@ const mstyles = StyleSheet.create({
         height: 0.5,
     },
     scrollview: {
-        height: '78%',
+        height: '79%',
         marginTop: 10,
     },
     box: {
         flexDirection: 'row',
-        marginTop: 4,
+        height: 50,
+        alignItems: 'center',
+        marginTop: 5,
     },
     textinput: {
         height: 40,
-        width: '54%',
+        width: '55%',
         fontSize: 16,
         borderRadius: 999,
-        borderWidth: 1,
+        marginLeft: 3,
     },
     touchsend: {
         height: '105%',
@@ -197,12 +201,6 @@ const mstyles = StyleSheet.create({
     },
     shapes: {
         flexDirection: 'row',
-    },
-    icon: {
-        height: 25,
-        width: 25,
-        marginTop: 4,
-        marginLeft: 5,
     },
     shape: {
         height: '105%',
@@ -218,6 +216,7 @@ const mstyles = StyleSheet.create({
         flexDirection: 'row',
         height: 40,
         width: '20%',
+        marginLeft: 20,
     },
     avatar: {
         borderRadius: 999,
@@ -264,5 +263,19 @@ const mstyles = StyleSheet.create({
     textInFlatList: {
         fontSize: 18,
         margin: 10,
+    },
+    icon: {
+        height: 25,
+        width: 25,
+        margin: 3,
+    },
+    iconbox: {
+        height: 30,
+        width: 30,
+        margin: 5,
+    },
+    imgbottom: {
+        height: 70,
+        width: 380,
     },
 })
