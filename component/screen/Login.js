@@ -1,6 +1,6 @@
 // Copyright (c) 2019-present vantuan88291, Personal. All Rights Reserved.
 import React, {Component} from 'react'
-import {View, Text, TextInput, Image, TouchableOpacity, StyleSheet, ImageBackground} from 'react-native'
+import {View, Text, TextInput, Image, TouchableOpacity, StyleSheet, ScrollView} from 'react-native'
 
 class Login extends Component {
     static navigationOptions = {
@@ -14,56 +14,58 @@ class Login extends Component {
 
     render() {
         return (
-            <View>
-                <ImageBackground
-                    source={require('/home/vu/ReactNative/btl1/image/loginui.png')}
-                    style={styles.imgbg}
-                >
-                    <View style={styles.container}>
-                        <Text style={styles.textchat}>Chat Bot</Text>
-                        <View style={styles.separator2}/>
-                        <View style={styles.box}>
-                            <Image
-                                resizeMode='cover'
-                                style={styles.iconemail}
-                                source={require('/home/vu/ReactNative/btl1/image/Mail.png')}
-                            />
-                            <TextInput
-                                style={styles.textinput}
-                                placeholder='Email'
-                            />
-                        </View>
-                        <View style={styles.separator}/>
-                        <View style={styles.box}>
-                            <Image
-                                style={styles.iconkey}
-                                source={require('/home/vu/ReactNative/btl1/image/Key.png')}
-                            />
-                            <TextInput
-                                style={styles.textinput}
-                                placeholder='Password'
-                            />
-                        </View>
-                        <View style={styles.separator}/>
-                        <TouchableOpacity
-                            style={styles.touch}
-                            onPress={this.navigateToChatScr}
-                        >
-                            <Text style={styles.touchtext}>Login</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity>
-                            <Text style={styles.textforgot}>FORGOT PASSWORD?</Text>
-                        </TouchableOpacity>
-                        <View style={styles.separator1}/>
-                        <View style={styles.bottom}>
-                            <Text>Don't have an account? </Text>
-                            <TouchableOpacity>
-                                <Text style={styles.textsignup}>Sign Up</Text>
-                            </TouchableOpacity>
-                        </View>
+            <ScrollView>
+                <View>
+                    <Image
+                        source={require('/home/vu/ReactNative/btl1/image/loginui.png')}
+                        style={styles.imgbg}
+                    />
+                </View>
+                <View style={styles.container}>
+                    <Text style={styles.textchat}>Chat Bot</Text>
+                    <View style={styles.separator2}/>
+                    <View style={styles.box}>
+                        <Image
+                            resizeMode='cover'
+                            style={styles.iconemail}
+                            source={require('/home/vu/ReactNative/btl1/image/Mail.png')}
+                        />
+                        <TextInput
+                            style={styles.textinput}
+                            placeholder='Email'
+                        />
                     </View>
-                </ImageBackground>
-            </View>
+                    <View style={styles.separator}/>
+                    <View style={styles.box}>
+                        <Image
+                            style={styles.iconkey}
+                            source={require('/home/vu/ReactNative/btl1/image/Key.png')}
+                        />
+                        <TextInput
+                            style={styles.textinput}
+                            secureTextEntry={true}
+                            placeholder='Password'
+                        />
+                    </View>
+                    <View style={styles.separator}/>
+                    <TouchableOpacity
+                        style={styles.touch}
+                        onPress={this.navigateToChatScr}
+                    >
+                        <Text style={styles.touchtext}>Login</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text style={styles.textforgot}>FORGOT PASSWORD?</Text>
+                    </TouchableOpacity>
+                    <View style={styles.separator1}/>
+                    <View style={styles.bottom}>
+                        <Text>Don't have an account? </Text>
+                        <TouchableOpacity>
+                            <Text style={styles.textsignup}>Sign Up</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </ScrollView>
         )
     }
 }
@@ -72,19 +74,19 @@ export default Login
 
 const styles = StyleSheet.create({
     imgbg: {
-        height: '100%', //107
-        width: '100%',
+        height: 300, //107
+        width: 400,
         marginTop: 0,
     },
     container: {
-        marginTop: '55%',
+        marginTop: 0,
         flexDirection: 'column',
         alignItems: 'center',
     },
     textchat: {
         fontSize: 45,
         color: '#FFFFFF',
-        marginTop: -150,
+        marginTop: -230,
     },
     box: {
         flexDirection: 'row',
