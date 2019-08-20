@@ -4,18 +4,15 @@ import {
     createDrawerNavigator,
     createStackNavigator,
     createAppContainer,
-    createSwitchNavigator,
 } from 'react-navigation'
 import Login from './component/screen/Login'
-import ListContact from './component/screen/ListContact'
 import DrawerInfo from './component/screen/DrawerInfo'
 import Chat from './component/screen/Chat'
 
 const DrawerNavigation = createDrawerNavigator(
     {
-        ListContact,
-        DrawerNav: DrawerInfo,
         ChatScr: Chat,
+        DrawerNav: DrawerInfo,
     },
     {
         contentComponent: DrawerInfo,
@@ -24,7 +21,7 @@ const DrawerNavigation = createDrawerNavigator(
 const StackNavigation = createStackNavigator(
     {
         LoginScr: Login,
-        ListContactScr: {
+        ChatScr: {
             screen: DrawerNavigation,
             navigationOptions: {
                 header: null,

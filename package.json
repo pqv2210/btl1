@@ -8,6 +8,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "bundle": "^2.1.0",
     "eslint-plugin-header": "^3.0.0",
     "eslint-plugin-jest": "^22.15.1",
     "eslint-plugin-react": "^7.14.3",

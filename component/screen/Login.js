@@ -1,6 +1,6 @@
 // Copyright (c) 2019-present vantuan88291, Personal. All Rights Reserved.
 import React, {Component} from 'react'
-import {View, Text, TextInput, Image, TouchableOpacity, StyleSheet, ScrollView, ImageBackground} from 'react-native'
+import {View, Text, TextInput, Image, TouchableOpacity, StyleSheet, ImageBackground} from 'react-native'
 
 class Login extends Component {
     static navigationOptions = {
@@ -8,56 +8,56 @@ class Login extends Component {
         drawerLockMode: 'locked-open',
     };
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            textEmail: 'Email',
-            textPass: 'Password',
-        }
-    }
-
     render() {
         return (
-            <ScrollView>
-                <ImageBackground
-                    source={require('/home/vu/ReactNative/btl1/image/Login.png')}
-                    style={{width: '100%', height: '100%'}}
-                >
-                    <View style={styles.container}>
-                        <View style={styles.box}>
-                            <Image
-                                style={styles.icon}
-                                source={require('/home/vu/ReactNative/btl1/image/Mail.png')}
-                            />
-                            <TextInput
-                                style={styles.textinput}
-                                onChangeText={(textEmail) => this.setState({textEmail})}
-                                value={this.state.textEmail}
-                            />
-                        </View>
-                        <View style={styles.separator}/>
-                        <View style={styles.box}>
-                            <Image
-                                style={styles.icon}
-                                source={require('/home/vu/ReactNative/btl1/image/Key.png')}
-                            />
-                            <TextInput
-                                style={styles.textinput}
-                                onChangeText={(textPass) => this.setState({textPass})}
-                                value={this.state.textPass}
-                            />
-                        </View>
-                        <View style={styles.separator}/>
-                        <TouchableOpacity
-                            style={styles.touch}
-                            title='Login'
-                            onPress={() => this.props.navigation.navigate('ListContactScr')}
-                        >
-                            <Text style={styles.touchtext}>Login</Text>
+            <ImageBackground
+                source={require('/home/vu/ReactNative/btl1/image/axigola.png')}
+                style={styles.imgbg}
+            >
+                <View style={styles.container}>
+                    <Text style={styles.textchat}>Chat Demo</Text>
+                    <View style={styles.separator2}/>
+                    <View style={styles.box}>
+                        <Image
+                            resizeMode='cover'
+                            style={styles.icon}
+                            source={require('/home/vu/ReactNative/btl1/image/Mail.png')}
+                        />
+                        <TextInput
+                            style={styles.textinput}
+                            placeholder='Email'
+                        />
+                    </View>
+                    <View style={styles.separator}/>
+                    <View style={styles.box}>
+                        <Image
+                            style={styles.icon}
+                            source={require('/home/vu/ReactNative/btl1/image/Key.png')}
+                        />
+                        <TextInput
+                            style={styles.textinput}
+                            placeholder='Password'
+                        />
+                    </View>
+                    <View style={styles.separator}/>
+                    <TouchableOpacity
+                        style={styles.touch}
+                        onPress={() => this.props.navigation.navigate('ChatScr')}
+                    >
+                        <Text style={styles.touchtext}>Login</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text style={styles.textforgot}>FORGOT PASSWORD?</Text>
+                    </TouchableOpacity>
+                    <View style={styles.separator1}/>
+                    <View style={styles.bottom}>
+                        <Text>Don't have an account? </Text>
+                        <TouchableOpacity>
+                            <Text style={styles.textsignup}>Sign Up</Text>
                         </TouchableOpacity>
                     </View>
-                </ImageBackground>
-            </ScrollView>
+                </View>
+            </ImageBackground>
         )
     }
 }
@@ -65,14 +65,25 @@ class Login extends Component {
 export default Login
 
 const styles = StyleSheet.create({
+    imgbg: {
+        height: '107%', //107
+        width: '107%',
+        marginTop: -70,
+        marginLeft: -18,
+    },
     container: {
-        marginTop: '100%',
+        marginTop: '80%',
         flexDirection: 'column',
         alignItems: 'center',
     },
+    textchat: {
+        fontSize: 45,
+        color: '#FFFFFF',
+        marginTop: -150,
+    },
     box: {
         flexDirection: 'row',
-        height: 40,
+        height: 50,
         width: '70%',
         borderWidth: 1,
         borderRadius: 30,
@@ -83,31 +94,51 @@ const styles = StyleSheet.create({
         marginTop: 2,
     },
     separator: {
-        height: 10,
+        height: 20,
+        width: '100%',
+    },
+    separator1: {
+        height: 80,
+        width: '100%',
+    },
+    separator2: {
+        height: 140,
         width: '100%',
     },
     textinput: {
-        height: 40,
+        height: 50,
         fontSize: 18,
-        width: '100%',
+        width: '80%',
     },
     touch: {
-        height: 40,
+        height: 50,
         width: '70%',
-        borderWidth: 1,
         borderRadius: 30,
-        backgroundColor: '#b50591',
+        backgroundColor: '#b549ac',
         alignItems: 'center',
+        justifyContent: 'center',
     },
     touchtext: {
         fontSize: 20,
         color: '#FFFFFF',
-        marginTop: 3,
     },
     icon: {
         marginLeft: 10,
-        marginTop: 10,
+        marginTop: 15,
         height: 16,
         width: 19,
+    },
+    textforgot: {
+        fontSize: 13,
+        color: '#b549ac',
+        marginTop: 10,
+    },
+    bottom: {
+        flexDirection: 'row',
+        marginBottom: 1,
+    },
+    textsignup: {
+        fontSize: 13,
+        color: '#3289b5',
     },
 })
