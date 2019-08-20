@@ -22,7 +22,7 @@ class DrawerInfo extends Component {
                        style={mstyles.image}
                    />
                    <View style={mstyles.box}>
-                       <Text style={mstyles.text}>Johnny Deep</Text>
+                       <Text style={mstyles.text}>Meow</Text>
                        <Text style={mstyles.text}>meow@gmail.com</Text>
                    </View>
                </View>

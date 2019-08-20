@@ -1,6 +1,7 @@
 // Copyright (c) 2019-present vantuan88291, Personal. All Rights Reserved.
 import React, {Component} from 'react'
 import {View, Image, Text, TextInput, StyleSheet, ScrollView, FlatList, TouchableOpacity, ImageBackground} from 'react-native'
+import DisplayChat from './DisplayChat'
 
 class Chat extends Component {
     static navigationOptions = {header: null};
@@ -64,7 +65,7 @@ class Chat extends Component {
                         source={require('/home/vu/ReactNative/btl1/image/Title.png')}
                         style={mstyles.imgbg}
                     >
-                        <View style={mstyles.box}>
+                        <View style={mstyles.headerbox}>
                             <TouchableOpacity style={mstyles.iconbox}>
                                 <Image
                                     source={require('/home/vu/ReactNative/btl1/image/GoBack.png')}
@@ -78,43 +79,11 @@ class Chat extends Component {
                 <ScrollView style={mstyles.scrollview}>
                     <FlatList
                         data={this.state.messages}
-                        renderItem={({item}) => {
-                            // id user = 1 => icon va text o ben phai
-                            if (item.user.id === 1) {
-                                return (
-                                    <View style={mstyles.flatlist}>
-                                        <Image
-                                            source={{uri: item.user.avatar}}
-                                            style={mstyles.avatar}
-                                        />
-                                        <View style={mstyles.shapes}>
-                                            <View style={mstyles.talkBubbleSquare}>
-                                                <Text style={mstyles.textInFlatList}>{item.text}</Text>
-                                            </View>
-                                            <View style={mstyles.triangleCornerRight}/>
-                                        </View>
-                                    </View>
-                                )
-                            }
-
-                            // id user # 1 => icon va text o ben trai
-                            if (item.user.id !== 1) {
-                                return (
-                                    <View style={mstyles.flatlistback}>
-                                        <Image
-                                            source={{uri: item.user.avatar}}
-                                            style={mstyles.avatar}
-                                        />
-                                        <View style={mstyles.shapes}>
-                                            <View style={mstyles.triangleCornerLeft}/>
-                                            <View style={mstyles.talkBubbleSquareBack}>
-                                                <Text style={mstyles.textInFlatList}>{item.text}</Text>
-                                            </View>
-                                        </View>
-                                    </View>
-                                )
-                            }
-                        }}
+                        renderItem={({item}) => (
+                            <DisplayChat
+                                item={item}
+                            />
+                        )}
                         ItemSeparatorComponent={this.separator}
                     />
                 </ScrollView>
@@ -161,7 +130,7 @@ export default Chat
 const mstyles = StyleSheet.create({
     container: {
         flexDirection: 'column',
-        backgroundColor: '#ffffff',
+        backgroundColor: '#f3f3f3',
     },
     imgbg: {
         height: 55,
@@ -174,19 +143,25 @@ const mstyles = StyleSheet.create({
     },
     separator: {
         width: '100%',
-        backgroundColor: '#ffffff',
+        backgroundColor: '#f3f3f3',
         marginTop: 5,
         height: 0.5,
     },
     scrollview: {
-        height: '79%',
+        height: '78%',
         marginTop: 10,
     },
-    box: {
+    headerbox: {
         flexDirection: 'row',
         height: 50,
         alignItems: 'center',
-        marginTop: 5,
+    },
+    box: {
+        flexDirection: 'row',
+        height: 55,
+        alignItems: 'center',
+        marginTop: 7,
+        marginLeft: 30,
     },
     textinput: {
         height: 40,
@@ -202,67 +177,11 @@ const mstyles = StyleSheet.create({
     shapes: {
         flexDirection: 'row',
     },
-    shape: {
-        height: '105%',
-        width: '105%',
-    },
-    flatlistback: {
-        flexDirection: 'row',
-    },
-    flatlist: {
-        flexDirection: 'row-reverse',
-    },
     button: {
         flexDirection: 'row',
         height: 40,
         width: '20%',
         marginLeft: 20,
-    },
-    avatar: {
-        borderRadius: 999,
-        height: 50,
-        width: 50,
-    },
-    talkBubbleSquare: {
-        width: 200,
-        height: 50,
-        backgroundColor: '#CBEED4',
-        borderRadius: 10,
-    },
-    talkBubbleSquareBack: {
-        width: 200,
-        height: 50,
-        backgroundColor: '#CBEED4',
-        borderRadius: 10,
-        marginLeft: -15,
-    },
-    triangleCornerRight: {
-        width: 0,
-        height: 0,
-        backgroundColor: 'transparent',
-        borderStyle: 'solid',
-        borderRightWidth: 35,
-        borderTopWidth: 35,
-        borderRightColor: 'transparent',
-        borderTopColor: '#CBEED4',
-        marginLeft: -15,
-    },
-    triangleCornerLeft: {
-        width: 0,
-        height: 0,
-        backgroundColor: 'transparent',
-        borderStyle: 'solid',
-        borderRightWidth: 35,
-        borderTopWidth: 35,
-        borderRightColor: 'transparent',
-        borderTopColor: '#cbeed4',
-        transform: [
-            {rotate: '90deg'},
-        ],
-    },
-    textInFlatList: {
-        fontSize: 18,
-        margin: 10,
     },
     icon: {
         height: 25,
@@ -275,7 +194,8 @@ const mstyles = StyleSheet.create({
         margin: 5,
     },
     imgbottom: {
-        height: 70,
+        height: 75,
         width: 380,
+        marginLeft: -20,
     },
 })
