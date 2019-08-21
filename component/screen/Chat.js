@@ -10,6 +10,13 @@ class Chat extends Component {
         super(props)
         this.state = {
             messages: [],
+            item: {
+                text: '',
+                user: {
+                    id: 1,
+                    avatar: 'https://placeimg.com/140/140/any',
+                },
+            },
         }
     }
 
@@ -25,34 +32,27 @@ class Chat extends Component {
                 {
                     id: 1,
                     text: 'Hello Bravo!',
-                    createdAt: '9:00 PM',
                     user: {
                         id: 1,
-                        name: 'Alpha',
                         avatar: 'https://placeimg.com/140/140/any',
                     },
                 },
                 {
                     id: 2,
                     text: 'Hello Alpha!',
-                    createdAt: '9:03 PM',
                     user: {
                         id: 2,
-                        name: 'Bravo',
                         avatar: 'https://lh3.googleusercontent.com/7M7NquJct0L_jW6kzydcYCAaSGK0C9UEpCdFldLiGizTXPkkn77Pj8BXbNH2h1ZvWGJ8=s85',
                     },
                 },
                 {
                     id: 3,
                     text: 'Where is Charlie,boi?',
-                    createdAt: '9:05 PM',
                     user: {
                         id: 1,
-                        name: 'Alpha',
                         avatar: 'https://placeimg.com/140/140/any',
                     },
                 },
-
             ],
         })
     }
@@ -110,7 +110,9 @@ class Chat extends Component {
                                 placeholder='Text Massage'
                             />
                             <View style={mstyles.button}>
-                                <TouchableOpacity style={mstyles.iconbox}>
+                                <TouchableOpacity
+                                    style={mstyles.iconbox}
+                                >
                                     <Image
                                         style={mstyles.icon}
                                         source={require('/home/vu/ReactNative/btl1/image/Send.png')}

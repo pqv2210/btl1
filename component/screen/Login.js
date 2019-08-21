@@ -14,55 +14,57 @@ class Login extends Component {
 
     render() {
         return (
-            <ScrollView>
+            <ScrollView style={styles.scrollview}>
                 <View>
-                    <Image
-                        source={require('/home/vu/ReactNative/btl1/image/loginui.png')}
-                        style={styles.imgbg}
-                    />
-                </View>
-                <View style={styles.container}>
-                    <Text style={styles.textchat}>Chat Bot</Text>
-                    <View style={styles.separator2}/>
-                    <View style={styles.box}>
+                    <View style={styles.header}>
                         <Image
-                            resizeMode='cover'
-                            style={styles.iconemail}
-                            source={require('/home/vu/ReactNative/btl1/image/Mail.png')}
+                            source={require('/home/vu/ReactNative/btl1/image/loginui.png')}
+                            style={styles.imgbg}
                         />
-                        <TextInput
-                            style={styles.textinput}
-                            placeholder='Email'
-                        />
+                        <Text style={styles.textchat}>Chat Bot</Text>
                     </View>
-                    <View style={styles.separator}/>
-                    <View style={styles.box}>
-                        <Image
-                            style={styles.iconkey}
-                            source={require('/home/vu/ReactNative/btl1/image/Key.png')}
-                        />
-                        <TextInput
-                            style={styles.textinput}
-                            secureTextEntry={true}
-                            placeholder='Password'
-                        />
-                    </View>
-                    <View style={styles.separator}/>
-                    <TouchableOpacity
-                        style={styles.touch}
-                        onPress={this.navigateToChatScr}
-                    >
-                        <Text style={styles.touchtext}>Login</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.textforgot}>FORGOT PASSWORD?</Text>
-                    </TouchableOpacity>
-                    <View style={styles.separator1}/>
-                    <View style={styles.bottom}>
-                        <Text>Don't have an account? </Text>
-                        <TouchableOpacity>
-                            <Text style={styles.textsignup}>Sign Up</Text>
+                    <View style={styles.container}>
+                        <View style={styles.separator2}/>
+                        <View style={styles.box}>
+                            <Image
+                                resizeMode='cover'
+                                style={styles.iconemail}
+                                source={require('/home/vu/ReactNative/btl1/image/Mail.png')}
+                            />
+                            <TextInput
+                                style={styles.textinput}
+                                placeholder='Email'
+                            />
+                        </View>
+                        <View style={styles.separator}/>
+                        <View style={styles.box}>
+                            <Image
+                                style={styles.iconkey}
+                                source={require('/home/vu/ReactNative/btl1/image/Key.png')}
+                            />
+                            <TextInput
+                                style={styles.textinput}
+                                secureTextEntry={true}
+                                placeholder='Password'
+                            />
+                        </View>
+                        <View style={styles.separator}/>
+                        <TouchableOpacity
+                            style={styles.touch}
+                            onPress={this.navigateToChatScr}
+                        >
+                            <Text style={styles.touchtext}>Login</Text>
                         </TouchableOpacity>
+                        <TouchableOpacity>
+                            <Text style={styles.textforgot}>FORGOT PASSWORD?</Text>
+                        </TouchableOpacity>
+                        <View style={styles.separator1}/>
+                        <View style={styles.bottom}>
+                            <Text>Don't have an account? </Text>
+                            <TouchableOpacity>
+                                <Text style={styles.textsignup}>Sign Up</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             </ScrollView>
@@ -73,20 +75,25 @@ class Login extends Component {
 export default Login
 
 const styles = StyleSheet.create({
+    scrollview:{
+        flex: 1,
+    },
+    header: {
+        alignItems: 'center',
+    },
     imgbg: {
-        height: 300, //107
+        height: 300,
         width: 400,
-        marginTop: 0,
     },
     container: {
-        marginTop: 0,
         flexDirection: 'column',
         alignItems: 'center',
+        marginTop: 30,
     },
     textchat: {
         fontSize: 45,
         color: '#FFFFFF',
-        marginTop: -230,
+        marginTop: -200,
     },
     box: {
         flexDirection: 'row',
@@ -96,7 +103,6 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         fontSize: 20,
         alignItems: 'center',
-
     },
     text: {
         fontSize: 18,
@@ -148,6 +154,7 @@ const styles = StyleSheet.create({
     },
     bottom: {
         flexDirection: 'row',
+        marginBottom: 20,
     },
     textsignup: {
         fontSize: 13,
