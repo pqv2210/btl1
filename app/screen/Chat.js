@@ -1,6 +1,6 @@
 // Copyright (c) 2019-present vantuan88291, Personal. All Rights Reserved.
 import React, {Component} from 'react'
-import {View, Image, Text, TextInput, StyleSheet, ScrollView, FlatList, TouchableOpacity, ImageBackground} from 'react-native'
+import {View, Image, Text, TextInput, StyleSheet, ScrollView, FlatList, TouchableOpacity, ImageBackground, Keyboard} from 'react-native'
 import DisplayChat from '../component/DisplayChat'
 
 class Chat extends Component {
@@ -10,13 +10,7 @@ class Chat extends Component {
         super(props)
         this.state = {
             messages: [],
-            item: {
-                text: '',
-                user: {
-                    id: 1,
-                    avatar: 'https://placeimg.com/140/140/any',
-                },
-            },
+            text: '',
         }
     }
 
@@ -30,7 +24,6 @@ class Chat extends Component {
         this.setState({
             messages: [
                 {
-                    id: 1,
                     text: 'Hello Bravo!',
                     user: {
                         id: 1,
@@ -38,7 +31,6 @@ class Chat extends Component {
                     },
                 },
                 {
-                    id: 2,
                     text: 'Hello Alpha!',
                     user: {
                         id: 2,
@@ -46,7 +38,6 @@ class Chat extends Component {
                     },
                 },
                 {
-                    id: 3,
                     text: 'Where is Charlie,boi?',
                     user: {
                         id: 1,
@@ -55,6 +46,25 @@ class Chat extends Component {
                 },
             ],
         })
+    }
+
+    getValueFromTextInput = (text) => this.setState({text})
+
+    touchSend = () => {
+        // eslint-disable-next-line no-cond-assign
+        if (this.state.text !== '') {
+            const item = {
+                text: this.state.text,
+                user: {
+                    id: 1,
+                    avatar: 'https://placeimg.com/140/140/any',
+                },
+            }
+            const arr = this.state.messages.concat(item)
+            this.setState({messages: arr})
+            Keyboard.dismiss()
+            this.setState({text: ''})
+        }
     }
 
     render() {
@@ -87,40 +97,40 @@ class Chat extends Component {
                         ItemSeparatorComponent={this.separator}
                     />
                 </ScrollView>
-                <View>
-                    <ImageBackground
-                        source={require('/home/vu/ReactNative/btl1/app/image/Bottom.png')}
-                        style={mstyles.imgbottom}
-                    >
-                        <View style={mstyles.box}>
-                            <TouchableOpacity style={mstyles.iconbox}>
-                                <Image
-                                    style={mstyles.icon}
-                                    source={require('/home/vu/ReactNative/btl1/app/image/Plus.png')}
-                                />
-                            </TouchableOpacity>
-                            <TouchableOpacity style={mstyles.iconbox}>
-                                <Image
-                                    style={mstyles.icon}
-                                    source={require('/home/vu/ReactNative/btl1/app/image/Smile.png')}
-                                />
-                            </TouchableOpacity>
-                            <TextInput
-                                style={mstyles.textinput}
-                                placeholder='Text Massage'
+                <View style={mstyles.box}>
+                    <TouchableOpacity style={mstyles.iconbox}>
+                        <Image
+                            style={mstyles.icon}
+                            source={require('/home/vu/ReactNative/btl1/app/image/Plus.png')}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={mstyles.iconbox}>
+                        <Image
+                            style={mstyles.icon}
+                            source={require('/home/vu/ReactNative/btl1/app/image/Smile.png')}
+                        />
+                    </TouchableOpacity>
+                    <TextInput
+                        style={mstyles.textinput}
+                        placeholder='Text Massage'
+                        onChangeText={this.getValueFromTextInput}
+                        value={this.state.text}
+                    />
+                    <Image
+                        style={mstyles.shape}
+                        source={require('/home/vu/ReactNative/btl1/app/image/Shape.png')}
+                    />
+                    <View style={mstyles.button}>
+                        <TouchableOpacity
+                            style={mstyles.iconbox}
+                            onPress={this.touchSend}
+                        >
+                            <Image
+                                style={mstyles.icon}
+                                source={require('/home/vu/ReactNative/btl1/app/image/Send.png')}
                             />
-                            <View style={mstyles.button}>
-                                <TouchableOpacity
-                                    style={mstyles.iconbox}
-                                >
-                                    <Image
-                                        style={mstyles.icon}
-                                        source={require('/home/vu/ReactNative/btl1/app/image/Send.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </ImageBackground>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         )
@@ -150,7 +160,7 @@ const mstyles = StyleSheet.create({
         height: 0.5,
     },
     scrollview: {
-        height: '78%',
+        height: '80%',
         marginTop: 10,
     },
     headerbox: {
@@ -162,12 +172,12 @@ const mstyles = StyleSheet.create({
         flexDirection: 'row',
         height: 55,
         alignItems: 'center',
-        marginTop: 7,
-        marginLeft: 30,
+        backgroundColor: '#FFFFFF',
+        marginBottom: 0,
     },
     textinput: {
         height: 40,
-        width: '55%',
+        width: '50%',
         fontSize: 16,
         borderRadius: 999,
         marginLeft: 3,
@@ -183,7 +193,7 @@ const mstyles = StyleSheet.create({
         flexDirection: 'row',
         height: 40,
         width: '20%',
-        marginLeft: 20,
+        marginLeft: -80,
     },
     icon: {
         height: 25,
@@ -195,9 +205,12 @@ const mstyles = StyleSheet.create({
         width: 30,
         margin: 5,
     },
-    imgbottom: {
-        height: 75,
-        width: 380,
-        marginLeft: -20,
+    bottom: {
+        flexDirection: 'row',
+    },
+    shape: {
+        height: 58,
+        width: 120,
+        marginTop: 4,
     },
 })

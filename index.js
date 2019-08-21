@@ -3,4 +3,4 @@ import React,{Component} from 'react'
 import {AppRegistry} from 'react-native'
 import App from './App'
 
-AppRegistry.registerComponent('App', () => App)
+AppRegistry.registerComponent('btl1', () => App)

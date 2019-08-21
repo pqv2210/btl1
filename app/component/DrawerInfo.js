@@ -39,7 +39,7 @@ class DrawerInfo extends Component {
                        onPress={this.navigateAction}
                        style={mstyles.touch}
                    >
-                       <Text style={mstyles.text}>LogOut</Text>
+                       <Text style={mstyles.text}>Log Out</Text>
                    </TouchableOpacity>
                </View>
            </View>
