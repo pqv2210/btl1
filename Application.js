@@ -1,7 +1,7 @@
 // Copyright (c) 2019-present vantuan88291, Personal. All Rights Reserved.
 import React, {Component} from 'react'
 import {createAppContainer} from 'react-navigation'
-import StackNavigation from './component/screen/navigation/StackNavigation'
+import StackNavigation from './app/navigation/StackNavigation'
 
 const Application = createAppContainer(StackNavigation)
 

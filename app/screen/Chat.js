@@ -1,7 +1,7 @@
 // Copyright (c) 2019-present vantuan88291, Personal. All Rights Reserved.
 import React, {Component} from 'react'
 import {View, Image, Text, TextInput, StyleSheet, ScrollView, FlatList, TouchableOpacity, ImageBackground} from 'react-native'
-import DisplayChat from './DisplayChat'
+import DisplayChat from '../component/DisplayChat'
 
 class Chat extends Component {
     static navigationOptions = {header: null};
@@ -62,13 +62,13 @@ class Chat extends Component {
             <View style={mstyles.container}>
                 <View>
                     <ImageBackground
-                        source={require('/home/vu/ReactNative/btl1/image/Title.png')}
+                        source={require('/home/vu/ReactNative/btl1/app/image/Title.png')}
                         style={mstyles.imgbg}
                     >
                         <View style={mstyles.headerbox}>
                             <TouchableOpacity style={mstyles.iconbox}>
                                 <Image
-                                    source={require('/home/vu/ReactNative/btl1/image/GoBack.png')}
+                                    source={require('/home/vu/ReactNative/btl1/app/image/GoBack.png')}
                                     style={mstyles.icon}
                                 />
                             </TouchableOpacity>
@@ -89,20 +89,20 @@ class Chat extends Component {
                 </ScrollView>
                 <View>
                     <ImageBackground
-                        source={require('/home/vu/ReactNative/btl1/image/Bottom.png')}
+                        source={require('/home/vu/ReactNative/btl1/app/image/Bottom.png')}
                         style={mstyles.imgbottom}
                     >
                         <View style={mstyles.box}>
                             <TouchableOpacity style={mstyles.iconbox}>
                                 <Image
                                     style={mstyles.icon}
-                                    source={require('/home/vu/ReactNative/btl1/image/Plus.png')}
+                                    source={require('/home/vu/ReactNative/btl1/app/image/Plus.png')}
                                 />
                             </TouchableOpacity>
                             <TouchableOpacity style={mstyles.iconbox}>
                                 <Image
                                     style={mstyles.icon}
-                                    source={require('/home/vu/ReactNative/btl1/image/Smile.png')}
+                                    source={require('/home/vu/ReactNative/btl1/app/image/Smile.png')}
                                 />
                             </TouchableOpacity>
                             <TextInput
@@ -115,7 +115,7 @@ class Chat extends Component {
                                 >
                                     <Image
                                         style={mstyles.icon}
-                                        source={require('/home/vu/ReactNative/btl1/image/Send.png')}
+                                        source={require('/home/vu/ReactNative/btl1/app/image/Send.png')}
                                     />
                                 </TouchableOpacity>
                             </View>

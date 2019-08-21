@@ -18,7 +18,7 @@ class Login extends Component {
                 <View>
                     <View style={styles.header}>
                         <Image
-                            source={require('/home/vu/ReactNative/btl1/image/loginui.png')}
+                            source={require('/home/vu/ReactNative/btl1/app/image/loginui.png')}
                             style={styles.imgbg}
                         />
                         <Text style={styles.textchat}>Chat Bot</Text>
@@ -29,7 +29,7 @@ class Login extends Component {
                             <Image
                                 resizeMode='cover'
                                 style={styles.iconemail}
-                                source={require('/home/vu/ReactNative/btl1/image/Mail.png')}
+                                source={require('/home/vu/ReactNative/btl1/app/image/Mail.png')}
                             />
                             <TextInput
                                 style={styles.textinput}
@@ -40,7 +40,7 @@ class Login extends Component {
                         <View style={styles.box}>
                             <Image
                                 style={styles.iconkey}
-                                source={require('/home/vu/ReactNative/btl1/image/Key.png')}
+                                source={require('/home/vu/ReactNative/btl1/app/image/Key.png')}
                             />
                             <TextInput
                                 style={styles.textinput}
