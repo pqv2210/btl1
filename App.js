@@ -2,6 +2,7 @@
 
 import React, {Component} from 'react'
 import Application from './Application'
+import PopUp from "./app/component/PopUp";
 
 class App extends Component {
     render() {

@@ -1,6 +1,8 @@
 // Copyright (c) 2019-present vantuan88291, Personal. All Rights Reserved.
 import React, {Component} from 'react'
-import {View, Text, TextInput, Image, TouchableOpacity, StyleSheet, ScrollView} from 'react-native'
+import {View, Text, TextInput, Image, TouchableOpacity, StyleSheet, ScrollView, AsyncStorage} from 'react-native'
+
+//import PopUp from '../component/PopUp'
 
 class Login extends Component {
     static navigationOptions = {
@@ -8,7 +10,35 @@ class Login extends Component {
         drawerLockMode: 'locked-open',
     };
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            username: '',
+            password: '',
+        }
+    }
+
+    getValueUsername = (text) => this.setState({username: text})
+
+    getValuePassword = (text) => this.setState({password: text})
+
+    rememberUser = () => {
+        AsyncStorage.setItem('username', this.state.username)
+        AsyncStorage.setItem('password', this.state.password)
+    }
+
+    getremembedUser = async () => {
+        const username = await AsyncStorage.getItem('username')
+        const password = await AsyncStorage.getItem('password')
+        await this.setState({username, password})
+    };
+
+    componentDidMount() {
+        this.getremembedUser()
+    }
+
     navigateToChatScr = () => {
+        this.rememberUser()
         this.props.navigation.navigate('ChatScr')
     }
 
@@ -34,6 +64,8 @@ class Login extends Component {
                             <TextInput
                                 style={styles.textinput}
                                 placeholder='Email'
+                                onChangeText={this.getValueUsername}
+                                value={this.state.username}
                             />
                         </View>
                         <View style={styles.separator}/>
@@ -46,6 +78,8 @@ class Login extends Component {
                                 style={styles.textinput}
                                 secureTextEntry={true}
                                 placeholder='Password'
+                                onChangeText={this.getValuePassword}
+                                value={this.state.password}
                             />
                         </View>
                         <View style={styles.separator}/>
@@ -75,7 +109,7 @@ class Login extends Component {
 export default Login
 
 const styles = StyleSheet.create({
-    scrollview:{
+    scrollview: {
         flex: 1,
     },
     header: {

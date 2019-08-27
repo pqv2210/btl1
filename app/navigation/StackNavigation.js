@@ -1,7 +1,7 @@
 // Copyright (c) 2019-present vantuan88291, Personal. All Rights Reserved.
 import {createStackNavigator} from 'react-navigation'
 import Login from '../screen/Login'
-import DrawerNavigation from "./DrawerNavigation";
+import DrawerNavigation from './DrawerNavigation'
 
 const StackNavigation = createStackNavigator(
     {
