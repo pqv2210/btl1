@@ -3,37 +3,37 @@ import React from 'react'
 import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native'
 
 class PopUp extends React.Component {
-    hidePopUp = () => {
-        this.props.hidePopUp()
-    }
+  hidePopUp = () => {
+      this.props.hidePopUp()
+  }
 
-    render() {
-        if (this.props.isStatus === true) {
-            return (
-                <View style={mstyles.view}>
-                    <View style={mstyles.container}>
-                        <Image
-                            source={{uri: 'https://placeimg.com/140/140/any'}}
-                            style={mstyles.image}
-                        />
-                        <Text style={mstyles.welcome}>Welcome</Text>
-                        <TouchableOpacity
-                            style={mstyles.touchLetsGo}
-                        >
-                            <Text style={mstyles.letsgo}>Let's Go</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            style={mstyles.touchSkip}
-                            onPress={this.hidePopUp}
-                        >
-                            <Text style={mstyles.skip}>Skip</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            )
-        }
-        return null
-    }
+  render() {
+      if (this.props.isStatus === true) {
+          return (
+              <View style={mstyles.view}>
+                  <View style={mstyles.container}>
+                      <Image
+                          source={{uri: 'https://placeimg.com/140/140/any'}}
+                          style={mstyles.image}
+                      />
+                      <Text style={mstyles.welcome}>Welcome</Text>
+                      <TouchableOpacity
+                          style={mstyles.touchLetsGo}
+                      >
+                          <Text style={mstyles.letsgo}>Let's Go</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                          style={mstyles.touchSkip}
+                          onPress={this.hidePopUp}
+                      >
+                          <Text style={mstyles.skip}>Skip</Text>
+                      </TouchableOpacity>
+                  </View>
+              </View>
+          )
+      }
+      return null
+  }
 }
 
 export default PopUp
@@ -43,7 +43,7 @@ const mstyles = StyleSheet.create({
         height: '100%',
         width: '100%',
         position: 'absolute',
-        backgroundColor: 'rgba(52, 52, 52, 0.5)',
+        backgroundColor: 'rgba(52, 52, 52, 0.8)',
         alignItems: 'center',
         justifyContent: 'center',
     },

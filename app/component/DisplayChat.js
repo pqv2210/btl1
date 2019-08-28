@@ -1,12 +1,10 @@
 // Copyright (c) 2019-present vantuan88291, Personal. All Rights Reserved.
 import React, {Component} from 'react'
-import {View, Text, StyleSheet, Image} from 'react-native'
+import {View, Text, StyleSheet, Image, ActivityIndicator} from 'react-native'
 
 class DisplayChat extends Component {
     render() {
         const {item} = this.props
-
-        // id user  1 => icon va text o ben phai
         if (item.user.id === 1) {
             return (
                 <View style={mstyles.flatlist}>
@@ -15,27 +13,44 @@ class DisplayChat extends Component {
                         style={mstyles.avatar}
                     />
                     <View style={mstyles.shapes}>
+                        <View style={mstyles.triangleCornerRight}/>
                         <View style={mstyles.talkBubbleSquare}>
                             <Text style={mstyles.textInFlatListRight}>{item.text}</Text>
                         </View>
-                        <View style={mstyles.triangleCornerRight}/>
                     </View>
                 </View>
             )
         }
-
-        // id user # 1 => icon va text o ben trai
-        if (item.user.id !== 1) {
+        if (item.user.id === 2) {
             return (
                 <View style={mstyles.flatlistback}>
                     <Image
                         source={{uri: item.user.avatar}}
                         style={mstyles.avatar}
                     />
-                    <View style={mstyles.shapes}>
+                    <View style={mstyles.shapesback}>
                         <View style={mstyles.triangleCornerLeft}/>
                         <View style={mstyles.talkBubbleSquareBack}>
                             <Text style={mstyles.textInFlatListLeft}>{item.text}</Text>
+                        </View>
+                    </View>
+                </View>
+            )
+        }
+        if (item.user.id === 3) {
+            return (
+                <View style={mstyles.flatlistback}>
+                    <Image
+                        source={{uri: item.user.avatar}}
+                        style={mstyles.avatar}
+                    />
+                    <View style={mstyles.shapesback}>
+                        <View style={mstyles.triangleCornerLeft}/>
+                        <View style={mstyles.talkBubbleSquareBackLoading}>
+                            <ActivityIndicator
+                                size='small'
+                                color='#000000'
+                            />
                         </View>
                     </View>
                 </View>
@@ -48,6 +63,9 @@ export default DisplayChat
 
 const mstyles = StyleSheet.create({
     shapes: {
+        flexDirection: 'row-reverse',
+    },
+    shapesback: {
         flexDirection: 'row',
     },
     shape: {
@@ -72,22 +90,29 @@ const mstyles = StyleSheet.create({
         width: 50,
     },
     talkBubbleSquare: {
-        width: 200,
-        height: 50,
-        backgroundColor: '#529f88',
+        width: 'auto',
+        height: 'auto',
+        backgroundColor: '#639f85',
         borderRadius: 10,
+        maxWidth: 200,
     },
     talkBubbleSquareBack: {
-        width: 200,
-        height: 50,
+        width: 'auto',
+        height: 'auto',
         backgroundColor: '#FFFFFF',
         borderRadius: 10,
         marginLeft: -15,
-        shadowOffset: {
-            width: 10,
-            height: 10},
-        shadowColor: 'black',
-        shadowOpacity: 1.0,
+        maxWidth: 260,
+    },
+    talkBubbleSquareBackLoading: {
+        width: '50',
+        height: '50',
+        backgroundColor: '#FFFFFF',
+        borderRadius: 10,
+        marginLeft: -15,
+        maxWidth: 260,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     triangleCornerRight: {
         width: 0,
@@ -97,13 +122,8 @@ const mstyles = StyleSheet.create({
         borderRightWidth: 35,
         borderTopWidth: 35,
         borderRightColor: 'transparent',
-        borderTopColor: '#529f88',
+        borderTopColor: '#619f69',
         marginLeft: -15,
-        shadowOffset: {
-            width: 10,
-            height: 10},
-        shadowColor: 'black',
-        shadowOpacity: 1.0,
     },
     triangleCornerLeft: {
         width: 0,
@@ -117,16 +137,11 @@ const mstyles = StyleSheet.create({
         transform: [
             {rotate: '90deg'},
         ],
-        shadowOffset: {
-            width: 10,
-            height: 10},
-        shadowColor: 'black',
-        shadowOpacity: 1.0,
     },
     textInFlatListRight: {
         fontSize: 18,
         margin: 10,
-        color: '#FFFFFF'
+        color: '#FFFFFF',
     },
     textInFlatListLeft: {
         fontSize: 18,

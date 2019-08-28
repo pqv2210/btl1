@@ -1,18 +1,16 @@
 // Copyright (c) 2019-present vantuan88291, Personal. All Rights Reserved.
 import React, {Component} from 'react'
-import {View, Image, Text, TextInput, StyleSheet, ScrollView, FlatList, TouchableOpacity, ImageBackground, Keyboard} from 'react-native'
+import {View, Image, Text, TextInput, StyleSheet, ScrollView, FlatList, TouchableOpacity, ImageBackground, Keyboard, ActivityIndicator} from 'react-native'
 import DisplayChat from '../component/DisplayChat'
-import PopUp from '../component/PopUp'
 
 class Chat extends Component {
-    static navigationOptions = {header: null};
+    static navigationOptions = {header: null}
 
     constructor(props) {
         super(props)
         this.state = {
             messages: [],
             text: '',
-            status: false,
         }
     }
 
@@ -26,50 +24,49 @@ class Chat extends Component {
 
     touchSend = () => {
         if (this.state.text !== '') {
-            const item = {
-                text: this.state.text,
-                user: {
-                    id: 1,
-                    avatar: 'https://placeimg.com/140/140/any',
+            const item = [
+                {
+                    text: this.state.text,
+                    user: {
+                        id: 1,
+                        avatar: 'https://placeimg.com/150/150/any',
+                    },
                 },
-            }
+                {
+                    text: '',
+                    user: {
+                        id: 3,
+                        avatar: 'https://placeimg.com/140/140/any',
+                    },
+                },
+            ]
             const arr = this.state.messages.concat(item)
-            this.setState({messages: arr})
+            this.setState({
+                messages: arr,
+            })
             Keyboard.dismiss()
-            this.setState({text: ''})
+            this.fetchData().done()
         }
     }
 
-    changeStatus = () => {
-        this.setState({status: !this.state.status})
-    }
-
-    componentDidMount() {
+    async fetchData() {
+        const response = await fetch(`http://ghuntur.com/simsim.php?lc=en&deviceId=&bad0=&txt=${this.state.text}`)
+        const textres = await response.text()
+        const text = textres.replace(/\s\s+/g, ' ').trim()
         this.setState({
-            messages: [
-                {
-                    text: 'Hello Bravo!',
-                    user: {
-                        id: 1,
-                        avatar: 'https://placeimg.com/140/140/any',
-                    },
-                },
-                {
-                    text: 'Hello Alpha!',
-                    user: {
-                        id: 2,
-                        avatar: 'https://lh3.googleusercontent.com/7M7NquJct0L_jW6kzydcYCAaSGK0C9UEpCdFldLiGizTXPkkn77Pj8BXbNH2h1ZvWGJ8=s85',
-                    },
-                },
-                {
-                    text: 'Where is Charlie,boi?',
-                    user: {
-                        id: 1,
-                        avatar: 'https://placeimg.com/140/140/any',
-                    },
-                },
-            ],
+            text,
         })
+        const item = {
+            text: this.state.text,
+            user: {
+                id: 2,
+                avatar: 'https://placeimg.com/140/140/any',
+            },
+        }
+        this.state.messages.splice(-1, 1)
+        const arr = this.state.messages.concat(item)
+        this.setState({messages: arr})
+        this.setState({text: ''})
     }
 
     render() {
@@ -88,7 +85,7 @@ class Chat extends Component {
                                         style={mstyles.icon}
                                     />
                                 </TouchableOpacity>
-                                <Text style={mstyles.titletext}>Alpha</Text>
+                                <Text style={mstyles.titletext}>SimSim</Text>
                             </View>
                         </ImageBackground>
                     </View>
@@ -118,6 +115,8 @@ class Chat extends Component {
                         </TouchableOpacity>
                         <TextInput
                             style={mstyles.textinput}
+                            multiline={true}
+                            numberOfLine={10}
                             placeholder='Text Massage'
                             onChangeText={this.getValueFromTextInput}
                             value={this.state.text}
@@ -139,10 +138,6 @@ class Chat extends Component {
                         </View>
                     </View>
                 </View>
-                <PopUp
-                    hidePopUp={this.changeStatus}
-                    isStatus={this.state.status}
-                />
             </View>
         )
     }
@@ -171,8 +166,9 @@ const mstyles = StyleSheet.create({
         height: 0.5,
     },
     scrollview: {
-        height: '80.5%',
-        marginTop: 10,
+        height: '81%',
+        marginTop: 3,
+        marginBottom: 3,
     },
     headerbox: {
         flexDirection: 'row',

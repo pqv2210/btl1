@@ -2,8 +2,6 @@
 import React, {Component} from 'react'
 import {View, Text, TextInput, Image, TouchableOpacity, StyleSheet, ScrollView, AsyncStorage} from 'react-native'
 
-//import PopUp from '../component/PopUp'
-
 class Login extends Component {
     static navigationOptions = {
         header: null,
@@ -15,6 +13,7 @@ class Login extends Component {
         this.state = {
             username: '',
             password: '',
+            status: true,
         }
     }
 
@@ -33,13 +32,13 @@ class Login extends Component {
         await this.setState({username, password})
     };
 
-    componentDidMount() {
-        this.getremembedUser()
-    }
-
     navigateToChatScr = () => {
         this.rememberUser()
         this.props.navigation.navigate('ChatScr')
+    }
+
+    componentDidMount() {
+        this.getremembedUser()
     }
 
     render() {
