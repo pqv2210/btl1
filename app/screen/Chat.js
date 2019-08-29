@@ -29,14 +29,14 @@ class Chat extends Component {
                     text: this.state.text,
                     user: {
                         id: 1,
-                        avatar: 'https://placeimg.com/150/150/any',
+                        avatar: 'https://mymodernmet.com/wp/wp-content/uploads/2019/07/russian-blue-cats-17.jpg',
                     },
                 },
                 {
                     text: '',
                     user: {
                         id: 3,
-                        avatar: 'https://placeimg.com/140/140/any',
+                        avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWa039kQciNVVQ-AXImAVEcZce1Kib7TalX-x5irmDuj0RF7lXlA',
                     },
                 },
             ]
@@ -60,7 +60,7 @@ class Chat extends Component {
             text: this.state.text,
             user: {
                 id: 2,
-                avatar: 'https://placeimg.com/140/140/any',
+                avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWa039kQciNVVQ-AXImAVEcZce1Kib7TalX-x5irmDuj0RF7lXlA',
             },
         }
         this.state.messages.splice(-1, 1)

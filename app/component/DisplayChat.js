@@ -46,7 +46,12 @@ class DisplayChat extends Component {
                     />
                     <View style={mstyles.shapesback}>
                         <View style={mstyles.triangleCornerLeft}/>
-                        <View style={mstyles.talkBubbleSquareBackLoading}/>
+                        <View style={mstyles.talkBubbleSquareBackLoading}>
+                            <ActivityIndicator
+                                size='small'
+                                color='#9F2926'
+                            />
+                        </View>
                     </View>
                 </View>
             )
@@ -100,12 +105,11 @@ const mstyles = StyleSheet.create({
         maxWidth: 260,
     },
     talkBubbleSquareBackLoading: {
-        width: '50',
-        height: '50',
+        width: 50,
+        height: 50,
         backgroundColor: '#FFFFFF',
         borderRadius: 10,
         marginLeft: -15,
-        maxWidth: 260,
         alignItems: 'center',
         justifyContent: 'center',
     },
