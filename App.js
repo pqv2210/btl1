@@ -2,8 +2,6 @@
 import React, {Component} from 'react'
 import Application from './Application'
 
-//import TypingAnimation from './app/component/TypingAnimation'
-
 class App extends Component {
     render() {
         return <Application/>

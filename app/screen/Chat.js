@@ -1,6 +1,6 @@
 // Copyright (c) 2019-present vantuan88291, Personal. All Rights Reserved.
 import React, {Component} from 'react'
-import {View, Image, Text, TextInput, StyleSheet, ScrollView, FlatList, TouchableOpacity, ImageBackground, Keyboard, ActivityIndicator} from 'react-native'
+import {View, Image, Text, TextInput, StyleSheet, ScrollView, FlatList, TouchableOpacity, ImageBackground, Keyboard} from 'react-native'
 import DisplayChat from '../component/DisplayChat'
 
 class Chat extends Component {

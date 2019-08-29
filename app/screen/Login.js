@@ -50,7 +50,7 @@ class Login extends Component {
                             source={require('/home/vu/ReactNative/btl1/app/image/loginui.png')}
                             style={styles.imgbg}
                         />
-                        <Text style={styles.textchat}>Chat Bot</Text>
+                        <Text style={styles.textchat}>SimSim</Text>
                     </View>
                     <View style={styles.container}>
                         <View style={styles.separator2}/>

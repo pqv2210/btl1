@@ -46,12 +46,7 @@ class DisplayChat extends Component {
                     />
                     <View style={mstyles.shapesback}>
                         <View style={mstyles.triangleCornerLeft}/>
-                        <View style={mstyles.talkBubbleSquareBackLoading}>
-                            <ActivityIndicator
-                                size='small'
-                                color='#000000'
-                            />
-                        </View>
+                        <View style={mstyles.talkBubbleSquareBackLoading}/>
                     </View>
                 </View>
             )
