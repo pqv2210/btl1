@@ -1,6 +1,6 @@
 // Copyright (c) 2019-present vantuan88291, Personal. All Rights Reserved.
 import React, {Component} from 'react'
-import {View, Image, Text, TextInput, StyleSheet, ScrollView, FlatList, TouchableOpacity, ImageBackground, Keyboard} from 'react-native'
+import {View, Image, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, ImageBackground, Keyboard} from 'react-native'
 import DisplayChat from '../component/DisplayChat'
 
 class Chat extends Component {
@@ -43,6 +43,7 @@ class Chat extends Component {
             const arr = this.state.messages.concat(item)
             this.setState({
                 messages: arr,
+                text: '',
             })
             Keyboard.dismiss()
             this.fetchData().done()
@@ -53,11 +54,8 @@ class Chat extends Component {
         const response = await fetch(`http://ghuntur.com/simsim.php?lc=en&deviceId=&bad0=&txt=${this.state.text}`)
         const textres = await response.text()
         const text = textres.replace(/\s\s+/g, ' ').trim()
-        this.setState({
-            text,
-        })
         const item = {
-            text: this.state.text,
+            text,
             user: {
                 id: 2,
                 avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWa039kQciNVVQ-AXImAVEcZce1Kib7TalX-x5irmDuj0RF7lXlA',
@@ -65,77 +63,80 @@ class Chat extends Component {
         }
         this.state.messages.splice(-1, 1)
         const arr = this.state.messages.concat(item)
-        this.setState({messages: arr})
-        this.setState({text: ''})
+        this.setState({
+            messages: arr,
+            text: '',
+        })
+        this.scrollEnd()
+    }
+
+    scrollEnd = () => {
+        this.refs.flatList.scrollToEnd()
     }
 
     render() {
         return (
             <View style={mstyles.container}>
-                <View>
-                    <View>
-                        <ImageBackground
-                            source={require('/home/vu/ReactNative/btl1/app/image/Title.png')}
-                            style={mstyles.imgbg}
-                        >
-                            <View style={mstyles.headerbox}>
-                                <TouchableOpacity style={mstyles.iconbox}>
-                                    <Image
-                                        source={require('/home/vu/ReactNative/btl1/app/image/GoBack.png')}
-                                        style={mstyles.icon}
-                                    />
-                                </TouchableOpacity>
-                                <Text style={mstyles.titletext}>SimSim</Text>
-                            </View>
-                        </ImageBackground>
+                <ImageBackground
+                    source={require('/home/vu/ReactNative/btl1/app/image/Title.png')}
+                    style={mstyles.imgbg}
+                >
+                    <View style={mstyles.headerbox}>
+                        <TouchableOpacity style={mstyles.iconbox}>
+                            <Image
+                                source={require('/home/vu/ReactNative/btl1/app/image/GoBack.png')}
+                                style={mstyles.icon}
+                            />
+                        </TouchableOpacity>
+                        <Text style={mstyles.titletext}>SimSim</Text>
                     </View>
-                    <ScrollView style={mstyles.scrollview}>
-                        <FlatList
-                            data={this.state.messages}
-                            renderItem={({item}) => (
-                                <DisplayChat
-                                    item={item}
-                                />
-                            )}
-                            ItemSeparatorComponent={this.separator}
+                </ImageBackground>
+                <FlatList
+                    style={mstyles.flatlist}
+                    ref='flatList'
+                    data={this.state.messages}
+                    renderItem={({item}) => (
+                        <DisplayChat
+                            item={item}
                         />
-                    </ScrollView>
-                    <View style={mstyles.box}>
-                        <TouchableOpacity style={mstyles.iconbox}>
-                            <Image
-                                style={mstyles.icon}
-                                source={require('/home/vu/ReactNative/btl1/app/image/Plus.png')}
-                            />
-                        </TouchableOpacity>
-                        <TouchableOpacity style={mstyles.iconbox}>
-                            <Image
-                                style={mstyles.icon}
-                                source={require('/home/vu/ReactNative/btl1/app/image/Smile.png')}
-                            />
-                        </TouchableOpacity>
-                        <TextInput
-                            style={mstyles.textinput}
-                            multiline={true}
-                            numberOfLine={10}
-                            placeholder='Text Massage'
-                            onChangeText={this.getValueFromTextInput}
-                            value={this.state.text}
-                        />
+                    )}
+                    ItemSeparatorComponent={this.separator}
+                />
+                <View style={mstyles.box}>
+                    <TouchableOpacity style={mstyles.iconbox}>
                         <Image
-                            style={mstyles.shape}
-                            source={require('/home/vu/ReactNative/btl1/app/image/Shape.png')}
+                            style={mstyles.icon}
+                            source={require('/home/vu/ReactNative/btl1/app/image/Plus.png')}
                         />
-                        <View style={mstyles.button}>
-                            <TouchableOpacity
-                                style={mstyles.iconbox}
-                                onPress={this.touchSend}
-                            >
-                                <Image
-                                    style={mstyles.icon}
-                                    source={require('/home/vu/ReactNative/btl1/app/image/Send.png')}
-                                />
-                            </TouchableOpacity>
-                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={mstyles.iconbox}>
+                        <Image
+                            style={mstyles.icon}
+                            source={require('/home/vu/ReactNative/btl1/app/image/Smile.png')}
+                        />
+                    </TouchableOpacity>
+                    <TextInput
+                        style={mstyles.textinput}
+                        multiline={true}
+                        numberOfLine={10}
+                        placeholder='Text Massage'
+                        onChangeText={this.getValueFromTextInput}
+                        value={this.state.text}
+                    />
+                    <Image
+                        style={mstyles.shape}
+                        source={require('/home/vu/ReactNative/btl1/app/image/Shape.png')}
+                    />
+                    <View style={mstyles.button}>
+                        <TouchableOpacity
+                            style={mstyles.iconbox}
+                            onPress={this.touchSend}
+                        >
+                            <Image
+                                style={mstyles.icon}
+                                source={require('/home/vu/ReactNative/btl1/app/image/Send.png')}
+                            />
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -165,7 +166,7 @@ const mstyles = StyleSheet.create({
         marginTop: 5,
         height: 0.5,
     },
-    scrollview: {
+    flatlist: {
         height: '81%',
         marginTop: 3,
         marginBottom: 3,

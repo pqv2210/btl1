@@ -85,9 +85,9 @@ const mstyles = StyleSheet.create({
         marginLeft: 20,
     },
     avatar: {
-        borderRadius: 999,
         height: 50,
         width: 50,
+        borderRadius: 25,
     },
     talkBubbleSquare: {
         width: 'auto',
