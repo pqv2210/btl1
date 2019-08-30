@@ -67,7 +67,6 @@ class Chat extends Component {
             messages: arr,
             text: '',
         })
-        this.scrollEnd()
     }
 
     scrollEnd = () => {
@@ -94,6 +93,7 @@ class Chat extends Component {
                 <FlatList
                     style={mstyles.flatlist}
                     ref='flatList'
+                    onContentSizeChange={this.scrollEnd}
                     data={this.state.messages}
                     renderItem={({item}) => (
                         <DisplayChat
