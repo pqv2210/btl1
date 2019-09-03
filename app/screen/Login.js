@@ -1,19 +1,35 @@
 // Copyright (c) 2019-present vantuan88291, Personal. All Rights Reserved.
 import React, {Component} from 'react'
-import {View, Text, TextInput, Image, TouchableOpacity, StyleSheet, ScrollView, AsyncStorage} from 'react-native'
+import {
+    View,
+    Text,
+    TextInput,
+    Image,
+    TouchableOpacity,
+    StyleSheet,
+    ScrollView,
+    AsyncStorage,
+    Alert,
+} from 'react-native'
+import {create} from 'apisauce'
+import {NavigationActions, StackActions} from 'react-navigation'
+
+const resetAction = StackActions.reset({
+    index: 0,
+    actions: [NavigationActions.navigate({routeName: 'ChatScr'})],
+})
 
 class Login extends Component {
     static navigationOptions = {
         header: null,
         drawerLockMode: 'locked-open',
-    };
+    }
 
     constructor(props) {
         super(props)
         this.state = {
             username: '',
             password: '',
-            status: true,
         }
     }
 
@@ -30,11 +46,45 @@ class Login extends Component {
         const username = await AsyncStorage.getItem('username')
         const password = await AsyncStorage.getItem('password')
         await this.setState({username, password})
-    };
+    }
+
+    checkLogin = async () => {
+        if (this.state.username.length > 11 || this.state.username.length < 10) {
+            Alert.alert(
+                'Message',
+                'Your phone number too short/long',
+            )
+        } else {
+            const item = {
+                phone_number: this.state.username,
+                password: this.state.password,
+                device_token: '1',
+                device_os: '1',
+                checkVersion: '1',
+            }
+            const api = await create({baseURL: 'https://api.bonbon24h.com.vn/api/v2/passengers/login'})
+            const data = await api.post('', item)
+            if (data.data.status_code === 200) {
+                Alert.alert(
+                    'Login Success',
+                    `Welcome ${data.data.data.full_name}`,
+                    [{text: 'OK',
+                        onPress: () => {
+                            this.props.navigation.dispatch(resetAction)
+                        }}]
+                )
+            } else {
+                Alert.alert(
+                    'Message',
+                    data.data.message,
+                )
+            }
+        }
+    }
 
     navigateToChatScr = () => {
         this.rememberUser()
-        this.props.navigation.navigate('ChatScr')
+        this.checkLogin()
     }
 
     componentDidMount() {

@@ -51,9 +51,9 @@ class Chat extends Component {
     }
 
     async fetchData() {
-        const response = await fetch(`http://ghuntur.com/simsim.php?lc=en&deviceId=&bad0=&txt=${this.state.text}`)
-        const textres = await response.text()
-        const text = textres.replace(/\s\s+/g, ' ').trim()
+        const request = await fetch(`http://ghuntur.com/simsim.php?lc=en&deviceId=&bad0=&txt=${this.state.text}`)
+        const response = await request.text()
+        const text = response.replace(/\s\s+/g, ' ').trim()
         const item = {
             text,
             user: {

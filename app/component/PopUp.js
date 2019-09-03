@@ -3,37 +3,39 @@ import React from 'react'
 import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native'
 
 class PopUp extends React.Component {
-  hidePopUp = () => {
-      this.props.hidePopUp()
-  }
 
-  render() {
-      if (this.props.isStatus === true) {
-          return (
-              <View style={mstyles.view}>
-                  <View style={mstyles.container}>
-                      <Image
-                          source={{uri: 'https://placeimg.com/140/140/any'}}
-                          style={mstyles.image}
-                      />
-                      <Text style={mstyles.welcome}>Welcome</Text>
-                      <TouchableOpacity
-                          style={mstyles.touchLetsGo}
-                      >
-                          <Text style={mstyles.letsgo}>Let's Go</Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                          style={mstyles.touchSkip}
-                          onPress={this.hidePopUp}
-                      >
-                          <Text style={mstyles.skip}>Skip</Text>
-                      </TouchableOpacity>
-                  </View>
-              </View>
-          )
-      }
-      return null
-  }
+    hidePopUp = () => {
+        this.props.hidePopUp()
+        this.resetStack()
+    }
+
+    render() {
+        if (this.props.isStatus === true) {
+            return (
+                <View style={mstyles.view}>
+                    <View style={mstyles.container}>
+                        <Image
+                            source={{uri: 'https://placeimg.com/140/140/any'}}
+                            style={mstyles.image}
+                        />
+                        <Text style={mstyles.welcome}>Welcome</Text>
+                        <TouchableOpacity
+                            style={mstyles.touchLetsGo}
+                        >
+                            <Text style={mstyles.letsgo}>Let's Go</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={mstyles.touchSkip}
+                            onPress={this.hidePopUp}
+                        >
+                            <Text style={mstyles.skip}>Skip</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            )
+        }
+        return null
+    }
 }
 
 export default PopUp
