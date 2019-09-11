@@ -10,14 +10,10 @@ import {
     ScrollView,
     AsyncStorage,
     Alert,
+    ActivityIndicator,
 } from 'react-native'
 import {create} from 'apisauce'
 import {NavigationActions, StackActions} from 'react-navigation'
-
-const resetAction = StackActions.reset({
-    index: 0,
-    actions: [NavigationActions.navigate({routeName: 'ChatScr'})],
-})
 
 class Login extends Component {
     static navigationOptions = {
@@ -30,6 +26,7 @@ class Login extends Component {
         this.state = {
             username: '',
             password: '',
+            isLoading: false,
         }
     }
 
@@ -48,6 +45,14 @@ class Login extends Component {
         await this.setState({username, password})
     }
 
+    resetStack = () => {
+        const resetAction = StackActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({routeName: 'ChatScr'})],
+        })
+        this.props.navigation.dispatch(resetAction)
+    }
+
     checkLogin = async () => {
         if (this.state.username.length > 11 || this.state.username.length < 10) {
             Alert.alert(
@@ -55,6 +60,7 @@ class Login extends Component {
                 'Your phone number too short/long',
             )
         } else {
+            this.setState({isLoading: true})
             const item = {
                 phone_number: this.state.username,
                 password: this.state.password,
@@ -65,14 +71,8 @@ class Login extends Component {
             const api = await create({baseURL: 'https://api.bonbon24h.com.vn/api/v2/passengers/login'})
             const data = await api.post('', item)
             if (data.data.status_code === 200) {
-                Alert.alert(
-                    'Login Success',
-                    `Welcome ${data.data.data.full_name}`,
-                    [{text: 'OK',
-                        onPress: () => {
-                            this.props.navigation.dispatch(resetAction)
-                        }}]
-                )
+                this.setState({isLoading: false})
+                this.resetStack()
             } else {
                 Alert.alert(
                     'Message',
@@ -92,6 +92,22 @@ class Login extends Component {
     }
 
     render() {
+        const loginbtn = (
+            <TouchableOpacity
+                style={styles.touch}
+                onPress={this.navigateToChatScr}
+            >
+                <Text style={styles.touchtext}>Login</Text>
+            </TouchableOpacity>
+        )
+        const loadingview = (
+            <View style={styles.touch}>
+                <ActivityIndicator
+                    size='small'
+                    color='#00ff00'
+                />
+            </View>
+        )
         return (
             <ScrollView style={styles.scrollview}>
                 <View>
@@ -132,12 +148,7 @@ class Login extends Component {
                             />
                         </View>
                         <View style={styles.separator}/>
-                        <TouchableOpacity
-                            style={styles.touch}
-                            onPress={this.navigateToChatScr}
-                        >
-                            <Text style={styles.touchtext}>Login</Text>
-                        </TouchableOpacity>
+                        {this.state.isLoading ? loadingview : loginbtn}
                         <TouchableOpacity>
                             <Text style={styles.textforgot}>FORGOT PASSWORD?</Text>
                         </TouchableOpacity>
